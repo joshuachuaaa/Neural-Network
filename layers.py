@@ -27,7 +27,7 @@ class Layer :
             self.biases = np.zeros((1,num_neurons))
 
             #Previous Layer values
-            self.input = None
+            self.input = prev_layer_neuron
 
 
 
