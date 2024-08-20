@@ -16,8 +16,11 @@ class Layer :
         #Current Layer Values
         self.activated_value = None
 
-        #Gradient Vector
-        self.gradient_vector = np.zeros((1,num_neurons))
+        #Gradient Vector for weights
+        self.weight_gradient = np.zeros((1,num_neurons))
+
+        #Gradient Vector for Biases
+        self.bias_gradient = np.zeros((1,num_neurons))
 
         if prev_layer_neuron:
             #Two dimensional vector for the weights connecting previous layer of neurons to this layer"""
@@ -68,6 +71,11 @@ class Layer :
             self.get_output_gradient_vector(gradient_vector)
         
         else:
+            # We have to check for the self.neuron_values > 0 because we applied the ReLU function
+            # during the forward pass, which essentially makes the activation value to be 0 which means
+            # It did not have any impact on the Loss Function - Acts as a filter / mask
+            #Also the derivative of ReLU takes on two values [1,0]
+            self.gradient_vector = np.dot(gradient_vector, self.weights.T) * (self.neuron_value > 0)
 
 
     
