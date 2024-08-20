@@ -2,12 +2,12 @@ import numpy as np
 import ReLU
 class Layer : 
 
-    def __init__(self, prev_layer_neuron,  num_neurons, is_input:bool = False, is_output:bool = False):
+    def __init__(self, prev_layer_neuron,  num_neurons:int, is_input:bool = False, is_output:bool = False):
 
         """ To check if layer being created is input or output layer"""
         self.is_input = is_input
         self.is_output = is_output
-        
+
         """Two dimensional vector for the weights connecting previous layer of neurons to this layer"""
         self.weights = np.random.randn(prev_layer_neuron,num_neurons) * 0.1
 
@@ -37,6 +37,16 @@ class Layer :
 
         # Activated Value
         self.activated_value = ReLU.activate(self.neuron_value)
+
+    def activate(self):
+        if self.is_input:
+            pass
+        elif self.is_output:
+            
+        else:
+            self.activated_value = ReLU.activate(self.neuron_value)
+
+
 
     def backward_pass(self, gradient_vector):
 
