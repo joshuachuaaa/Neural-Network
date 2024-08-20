@@ -2,6 +2,9 @@ import numpy as np
 import ReLU
 import Softmax
 
+WEIGHT_GRADIENT = 0
+BIAS_GRADIENT = 1
+
 class Layer : 
 
     def __init__(self, prev_layer_neuron,  num_neurons:int, is_input:bool = False, is_output:bool = False):
@@ -62,32 +65,51 @@ class Layer :
 
 
 
-    def backward_pass(self, gradient_vector):
+    def backward_pass(self, downstream_gradient_vector, learning_rate:int):
 
         if self.is_input:
             pass
         
         elif self.is_output:
-            self.get_output_gradient_vector(gradient_vector)
+            self.get_output_gradient_vector(downstream_gradient_vector)
         
         else:
-            # We have to check for the self.neuron_values > 0 because we applied the ReLU function
-            # during the forward pass, which essentially makes the activation value to be 0 which means
-            # It did not have any impact on the Loss Function - Acts as a filter / mask
-            #Also the derivative of ReLU takes on two values [1,0]
-            self.gradient_vector = np.dot(gradient_vector, self.weights.T) * (self.neuron_value > 0)
+            
+            #ReLU derivative
+            ReLU_derivative = self.neuron_value > 0
 
+            #Find the error term
+            delta = downstream_gradient_vector * ReLU_derivative
+            
+            #Calculate the derivative of the loss function with respect to the weights
+            self.weight_gradient = np.dot(delta, self.input.T)
+
+            #Calculate the derivative of the loss function with respect to the biases
+            self.bias_gradient = delta
+
+            #Update values based on the learning rate 
+            self.update_values(learning_rate)
+
+            #Return the gradient for the previous layer -> derivative of the neuron value w.r.t previous layer activation function
+            return np.dot(delta,self.weights.T)
+        
 
     
+    def update_values(self, learning_rate:int):
+        """Update the weights and bias values based on the learning rate"""
+
+        #Update the biases
+        self.biases -= learning_rate * self.bias_gradient
+
+        #Update the weights
+        self.weights -= learning_rate * self.weight_gradient
+
 
     def get_output_gradient_vector(self, actual_values):
-        """
-        Gradient vector for the output layer.
-        """
+        """Gradient vector for the output layer."""
 
         # Gradient of the loss with respect to the logits (final output neuron values)
-        self.gradient_vector = self.activated_value - actual_values
-        return self.gradient_vector
+        self.weight_gradient = self.activated_value - actual_values
 
 
 
