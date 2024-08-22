@@ -2,9 +2,6 @@ import numpy as np
 import ReLU
 import Softmax
 
-WEIGHT_GRADIENT = 0
-BIAS_GRADIENT = 1
-
 class Layer : 
 
     def __init__(self, prev_layer_neuron,  num_neurons:int, is_input:bool = False, is_output:bool = False):
