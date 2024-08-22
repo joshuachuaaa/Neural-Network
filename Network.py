@@ -38,6 +38,11 @@ class NeuralNetwork:
         #Create output layer
         self.output_layer : Layer = Layer(self.layer_array[-1], self.output_dims, is_input=False, is_output=True)
 
+    def forward(self):
+        """To feed data forward and get the predicted result"""
+        pass
 
-            
+    def back_propagate(self):
+        """Back propagate the error for training and weight/bias adjustment"""
+        pass
 
