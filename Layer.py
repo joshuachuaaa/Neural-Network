@@ -71,24 +71,8 @@ class Layer :
             self.get_output_gradient_vector(downstream_gradient_vector)
         
         else:
-            
-            #ReLU derivative
-            ReLU_derivative = self.neuron_value > 0
-
-            #Find the error term
-            delta = downstream_gradient_vector * ReLU_derivative
-            
-            #Calculate the derivative of the loss function with respect to the weights
-            self.weight_gradient = np.dot(delta, self.input.T)
-
-            #Calculate the derivative of the loss function with respect to the biases
-            self.bias_gradient = delta
-
-            #Update values based on the learning rate 
-            self.update_values(learning_rate)
-
-            #Return the gradient for the previous layer -> derivative of the neuron value w.r.t previous layer activation function
-            return np.dot(delta,self.weights.T)
+            # To Implememnt
+            pass
         
 
     
