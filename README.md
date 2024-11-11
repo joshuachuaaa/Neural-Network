@@ -2,10 +2,11 @@
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
 
+# Update Log 3 - 12 November 2024
+1. Removed Backpropagation Logic
 
 # Update Log 2 - 8 November 2024
 1. Fixed Parameter passed in softmax function: output_layer
-2. 
 
 # Update Log 1 - 2 November 2024
 1. Fixed out of bounds error in the creation of the array
