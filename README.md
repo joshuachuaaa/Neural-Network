@@ -1,6 +1,8 @@
 # Neural-Network
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
+# Updated Log 4 - 28 December 2024
+1. Updated Specificity of Recieving Input Neuron Layer
 
 # Update Log 3 - 12 November 2024
 1. Removed Backpropagation Logic
