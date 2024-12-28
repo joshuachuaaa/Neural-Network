@@ -1,10 +1,11 @@
 import numpy as np
 import ReLU
 import Softmax
+from __future__ import annotations
 
 class Layer : 
 
-    def __init__(self, prev_layer_neuron,  num_neurons:int, is_input:bool = False, is_output:bool = False):
+    def __init__(self, prev_layer_neuron:Layer ,  num_neurons:int, is_input:bool = False, is_output:bool = False):
 
         #To check if layer being created is input or output layer
         self.is_input = is_input
