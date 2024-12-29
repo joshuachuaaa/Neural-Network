@@ -1,60 +1,47 @@
 import numpy as np
-import ReLU
 import Error
-import Softmax
 from __future__ import annotations
+from Activation import ReLU, Softmax
+
+class LayerType(Enum):
+    INPUT = "Input"
+    OUTPUT = "Output"
+    HIDDEN = "Hidden"
 
 class Layer : 
 
-    def __init__(self, input_dim:int, neurons:int,  is_input:bool = False, is_output:bool = False):
-
-        #To check if layer being created is input or output layer
-        self.is_input = is_input
-        self.is_output = is_output
-
-        #Default Neuron Matrix
-        self.neurons = None
-
-        #Default Weight Matrix
-        self.weights = None
-
-        #Default Bias Matrix
-        self.biases = None
-
-        #Default Error Term
-        self.error_term = None
-
-        #Gradient Vector for weights
-        self.weight_gradient = np.zeros((input_dim,neurons))
-
-        #Gradient Vector for Biases
-        self.bias_gradient = np.zeros((1,neurons))
-
-        if self.is_input:
-            #Two dimensional vector for the weights connecting previous layer of neurons to this layer"""
-            self.weights = np.random.randn(input_dim, neurons) * 0.1
+    def __init__( self, inputDim:int, outputDim:int, layerType:LayerType):
+        """
+        Initialization of Layer Class
+        Type of Layer determined by activation type
+        """
+        self.inputDim = inputDim
+        self.outputDim = outputDim
+        self.layerType = layerType
         
-            #One dimensional vector for biases
-            self.biases = np.zeros((1,neurons))
 
-            
-    def forward_pass(self, X):
-        """Calculate the neuron values of the current neuron values"""
-
+    def forward(self, X):
+        """
+        X shape: (batch_size, input_dim)
+        returns: (batch_size, output_dim)
+        """
+        if self.layerType == LayerType.INPUT:
+            return
         self.input = X
-        
-        # Neuron value of previous layer * Weights + Bias
-        self.neurons = np.dot(self.input, self.weights) + self.biases
-
-        # Activate Value
-        self.activate()
+        self.preActivation = np.dot(X,s)
 
     def activate(self):
         """Activate Neurons"""
-
-        #If input layer, No activation Function
-        if self.is_input:
+        # Input Layer
+        if self.layerType == LayerType.INPUT:
             pass
+
+        # Hidden Layer
+        elif self.layerType == LayerType.HIDDEN:
+            self.activationVal = ReLU.activate()
+
+
+            
 
         #If output layer, Use Softmax
         elif self.is_output:
