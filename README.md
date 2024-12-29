@@ -1,7 +1,11 @@
 # Neural-Network
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
-# Updated Log 4 - 28 December 2024
+
+# Update Log 4 - 30 December 2024 (Happy New Year!)
+1. Added Error Term Matrix to Layer class
+
+# Update Log 4 - 28 December 2024
 1. Updated Specificity of Recieving Input Neuron Layer
 
 # Update Log 3 - 12 November 2024

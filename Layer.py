@@ -11,17 +11,24 @@ class Layer :
         self.is_input = is_input
         self.is_output = is_output
 
-        #Neuron values
-        self.neuron_value = None
+        #Default Neuron Matrix
+        self.neurons = None
 
-        #Current Layer Values
-        self.activated_value = None
+        #Default Weight Matrix
+        self.weights = None
+
+        #Default Bias Matrix
+        self.biases = None
+
+        #Default Error Term
+        self.error_term = None
 
         #Gradient Vector for weights
         self.weight_gradient = np.zeros((1,num_neurons))
 
         #Gradient Vector for Biases
         self.bias_gradient = np.zeros((1,num_neurons))
+
 
         if prev_layer_neuron:
             #Two dimensional vector for the weights connecting previous layer of neurons to this layer"""
@@ -32,6 +39,8 @@ class Layer :
 
             #Previous Layer values
             self.input = prev_layer_neuron
+
+            
 
 
 
@@ -59,7 +68,7 @@ class Layer :
 
         #If hidden Layer, use ReLU
         else:
-            self.activated_value = ReLU.activate(self.neuron_value)
+            self.neuron_value = ReLU.activate(self.neuron_value)
 
 
 
