@@ -1,5 +1,2 @@
-arr = [1,2,3,4,5,6,7,9]
-
-
-
-print (arr[-1])
+def errorAccessLayer():
+    print("Error! Accessing Hidden Layer when calculating final layer output error term")

@@ -1,11 +1,12 @@
 import numpy as np
 import ReLU
+import Error
 import Softmax
 from __future__ import annotations
 
 class Layer : 
 
-    def __init__(self, prev_layer_neuron:Layer ,  num_neurons:int, is_input:bool = False, is_output:bool = False):
+    def __init__(self, prevLayer:Layer , nextLayer:Layer,  num_neurons:int, is_input:bool = False, is_output:bool = False):
 
         #To check if layer being created is input or output layer
         self.is_input = is_input
@@ -41,16 +42,13 @@ class Layer :
             self.input = prev_layer_neuron
 
             
-
-
-
     def forward_pass(self, X):
         """Calculate the neuron values of the current neuron values"""
 
         self.input = X
         
         # Neuron value of previous layer * Weights + Bias
-        self.neuron_value = np.dot(self.input, self.weights) + self.biases
+        self.neurons = np.dot(self.input, self.weights) + self.biases
 
         # Activate Value
         self.activate()
@@ -69,24 +67,9 @@ class Layer :
         #If hidden Layer, use ReLU
         else:
             self.neuron_value = ReLU.activate(self.neuron_value)
-
-
-
-    def backward_pass(self, downstream_gradient_vector, learning_rate:int):
-
-        if self.is_input:
-            pass
-        
-        elif self.is_output:
-            self.get_output_gradient_vector(downstream_gradient_vector)
-        
-        else:
-            # To Implememnt
-            pass
         
 
-    
-    def update_values(self, learning_rate:int):
+    def updateValues(self, learning_rate:int):
         """Update the weights and bias values based on the learning rate"""
 
         #Update the biases
@@ -95,12 +78,17 @@ class Layer :
         #Update the weights
         self.weights -= learning_rate * self.weight_gradient
 
+    def initErrorTerm(self, actualValues):
+        """Calculate Error Term for Layer"""
 
-    def get_output_gradient_vector(self, actual_values):
-        """Gradient vector for the output layer."""
+        if self.is_output:
+            self.error_term = np.array(actualValues) - np.array(self.neurons)
 
-        # Gradient of the loss with respect to the logits (final output neuron values)
-        self.weight_gradient = self.activated_value - actual_values
+        else:
+            Error.layerAccess()
+
+    def calcErrorTerm(self):
+
 
 
 
