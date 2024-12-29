@@ -6,7 +6,7 @@ from __future__ import annotations
 
 class Layer : 
 
-    def __init__(self, prevLayer:Layer , nextLayer:Layer,  num_neurons:int, is_input:bool = False, is_output:bool = False):
+    def __init__(self, input_dim:int, neurons:int,  is_input:bool = False, is_output:bool = False):
 
         #To check if layer being created is input or output layer
         self.is_input = is_input
@@ -25,21 +25,17 @@ class Layer :
         self.error_term = None
 
         #Gradient Vector for weights
-        self.weight_gradient = np.zeros((1,num_neurons))
+        self.weight_gradient = np.zeros((input_dim,neurons))
 
         #Gradient Vector for Biases
-        self.bias_gradient = np.zeros((1,num_neurons))
+        self.bias_gradient = np.zeros((1,neurons))
 
-
-        if prev_layer_neuron:
+        if self.is_input:
             #Two dimensional vector for the weights connecting previous layer of neurons to this layer"""
-            self.weights = np.random.randn(prev_layer_neuron,num_neurons) * 0.1
+            self.weights = np.random.randn(input_dim, neurons) * 0.1
         
             #One dimensional vector for biases
-            self.biases = np.zeros((1,num_neurons))
-
-            #Previous Layer values
-            self.input = prev_layer_neuron
+            self.biases = np.zeros((1,neurons))
 
             
     def forward_pass(self, X):
@@ -88,7 +84,9 @@ class Layer :
             Error.layerAccess()
 
     def calcErrorTerm(self):
-        """gi"""
+        """Error Term for Hidden Layers"""
+
+
 
 
 

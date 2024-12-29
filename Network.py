@@ -51,7 +51,7 @@ class NeuralNetwork:
 
         pass
 
-    def back_propagate(self):
+    def backProp(self):
         """Back propagate the error for training and weight/bias adjustment"""
         pass
 
