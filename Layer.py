@@ -79,7 +79,7 @@ class Layer :
         self.weights -= learning_rate * self.weight_gradient
 
     def initErrorTerm(self, actualValues):
-        """Calculate Error Term for Layer"""
+        """Calculate Error Term for Output Layer"""
 
         if self.is_output:
             self.error_term = np.array(actualValues) - np.array(self.neurons)
@@ -88,6 +88,8 @@ class Layer :
             Error.layerAccess()
 
     def calcErrorTerm(self):
+        """gi"""
+
 
 
 
