@@ -15,9 +15,14 @@ class Layer :
         Initialization of Layer Class
         Type of Layer determined by activation type
         """
-        self.inputDim = inputDim
-        self.outputDim = outputDim
+        self.weights = np.random.randn(inputDim, outputDim) * 0.01
+        self.biases = np.zeros((1, outputDim,))
         self.layerType = layerType
+
+        # For Clarity Sake,
+        self.input = None
+        self.preActivation = None
+        self.neurons = None
         
 
     def forward(self, X):
@@ -25,10 +30,20 @@ class Layer :
         X shape: (batch_size, input_dim)
         returns: (batch_size, output_dim)
         """
+        # If Input Layer, Do Nothing
         if self.layerType == LayerType.INPUT:
             return
+        
         self.input = X
-        self.preActivation = np.dot(X,s)
+
+        if self.layerType is LayerType.HIDDEN:
+            self.neurons = ReLU.activate(np.dot(X, self.weights) + self.biases)
+
+        elif self.layerType is LayerType.OUTPUT:
+            self.neurons = Softmax.activate(np.dot(X, self.weights) + self.biases)
+
+        return self.neurons
+
 
     def activate(self):
         """Activate Neurons"""
