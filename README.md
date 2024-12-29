@@ -4,6 +4,7 @@ My attempt at a neural network implemented in python with no external libraries 
 
 # Update Log 4 - 30 December 2024 (Happy New Year!)
 1. Added Error Term Matrix to Layer class
+2. Added Error.py and functionality to initialize the error term in the output layer
 
 # Update Log 4 - 28 December 2024
 1. Updated Specificity of Recieving Input Neuron Layer
