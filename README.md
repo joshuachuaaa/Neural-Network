@@ -9,6 +9,7 @@ My attempt at a neural network implemented in python with no external libraries 
 4. Updated Layer to not store any pointers to previous and next layers
 5. Added Enum for Layer Types & Moved Activation Functions to a single File
 6. ReFactored Forward Propagation Logic - to Make it cleaner and more modular
+7. Consolidated and simplified Forward Propgation Logic
 
 # Update Log 4 - 28 December 20
 1. Updated Specificity of Recieving Input Neuron Layer

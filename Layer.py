@@ -34,38 +34,23 @@ class Layer :
         if self.layerType == LayerType.INPUT:
             return
         
+        # Calculate Neuron Value if Hidden or Output Layer
         self.input = X
+        preActivation = np.dot(X, self.weights) + self.biases
+        return self._activate(preActivation)
 
+
+    def _activate(self, preActivation):
+        """Activate Neurons"""
+        
         if self.layerType is LayerType.HIDDEN:
-            self.neurons = ReLU.activate(np.dot(X, self.weights) + self.biases)
+            self.neurons = ReLU.activate(preActivation)
 
         elif self.layerType is LayerType.OUTPUT:
-            self.neurons = Softmax.activate(np.dot(X, self.weights) + self.biases)
+            self.neurons = Softmax.activate(preActivation)
 
         return self.neurons
 
-
-    def activate(self):
-        """Activate Neurons"""
-        # Input Layer
-        if self.layerType == LayerType.INPUT:
-            pass
-
-        # Hidden Layer
-        elif self.layerType == LayerType.HIDDEN:
-            self.activationVal = ReLU.activate()
-
-
-            
-
-        #If output layer, Use Softmax
-        elif self.is_output:
-            self.activated_value = Softmax.activate(self.neuron_value)
-
-        #If hidden Layer, use ReLU
-        else:
-            self.neuron_value = ReLU.activate(self.neuron_value)
-        
 
     def updateValues(self, learning_rate:int):
         """Update the weights and bias values based on the learning rate"""
