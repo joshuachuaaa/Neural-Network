@@ -1,5 +1,7 @@
-import Layer
+from Layer import Layer, LayerType
 import Settings
+import numpy as np
+
 class NeuralNetwork:
     """
     Neural Network class -> Serves as a wrapper for all the layers
@@ -38,7 +40,7 @@ class NeuralNetwork:
 
                 # Create the new hidden array ( hooking up the previous array )
                 new_hidden_layer = Layer(previous_layer, self.hidden_layers_dim, is_input=False, is_output=False)
-                
+
                 # Add this Layer to the array
                 self.layer_array.append(new_hidden_layer)
             
@@ -52,6 +54,25 @@ class NeuralNetwork:
         pass
 
     def backProp(self):
+
+        error = None
         """Back propagate the error for training and weight/bias adjustment"""
-        pass
+        for layer in self.layer_array:
+
+            if layer.layerType is LayerType.OUTPUT:
+                error = self._calcFinalError
+            if layer.layerType is LayerType.INPUT:
+                return
+            elif layer.layerType is LayerType.HIDDEN:
+                error = calcErrorTerm
+            
+    def _calcFinalError(self, rightVals):
+        """Find the error term in the output"""
+
+        return rightVals - self.layer_array[-1]
+    
+    def calcErrorTerm(self, layer : Layer, nextLayer : Layer):
+
+        return np.dot(np.transpose(nextLayer.weights), layer.weights ) * (how do i multiply it with the dimension of the layer neuron depending if > 0  or not)
+
 

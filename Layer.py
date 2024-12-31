@@ -2,6 +2,7 @@ import numpy as np
 import Error
 from __future__ import annotations
 from Activation import ReLU, Softmax
+from enum import Enum
 
 class LayerType(Enum):
     INPUT = "Input"
@@ -10,19 +11,21 @@ class LayerType(Enum):
 
 class Layer : 
 
-    def __init__( self, inputDim:int, outputDim:int, layerType:LayerType):
+    def __init__( self, inputDim:int, neuronDim:int, layerType:LayerType):
         """
         Initialization of Layer Class
         Type of Layer determined by activation type
         """
-        self.weights = np.random.randn(inputDim, outputDim) * 0.01
-        self.biases = np.zeros((1, outputDim,))
+        self.weights = np.random.randn(inputDim, neuronDim) * 0.01
+        self.biases = np.zeros(1, neuronDim)
         self.layerType = layerType
 
-        # For Clarity Sake,
+        self.errorVector = np.zeros(1, neuronDim)
+        self.gradientVector = np.zeros(inputDim, neuronDim)
+
+        # For sake of clarity,
         self.input = None
-        self.preActivation = None
-        self.neurons = None
+        self.activatedNeurons = None
         
 
     def forward(self, X):
@@ -36,18 +39,19 @@ class Layer :
         
         # Calculate Neuron Value if Hidden or Output Layer
         self.input = X
-        preActivation = np.dot(X, self.weights) + self.biases
-        return self._activate(preActivation)
+        preActivatedNeurons = np.dot(X, self.weights) + self.biases
+    
+        return self._activate(preActivatedNeurons)
 
 
-    def _activate(self, preActivation):
+    def _activate(self, preActivatedNeurons):
         """Activate Neurons"""
         
         if self.layerType is LayerType.HIDDEN:
-            self.neurons = ReLU.activate(preActivation)
+            self.activatedNeurons = ReLU.activate(preActivatedNeurons)
 
         elif self.layerType is LayerType.OUTPUT:
-            self.neurons = Softmax.activate(preActivation)
+            self.activatedNeurons = Softmax.activate(preActivatedNeurons)
 
         return self.neurons
 
@@ -61,17 +65,8 @@ class Layer :
         #Update the weights
         self.weights -= learning_rate * self.weight_gradient
 
-    def initErrorTerm(self, actualValues):
-        """Calculate Error Term for Output Layer"""
 
-        if self.is_output:
-            self.error_term = np.array(actualValues) - np.array(self.neurons)
 
-        else:
-            Error.layerAccess()
-
-    def calcErrorTerm(self):
-        """Error Term for Hidden Layers"""
 
 
 

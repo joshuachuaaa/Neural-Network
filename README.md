@@ -2,6 +2,10 @@
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
 
+# Update Log 5 - 31 Decemember 2024
+1. Updated Activation Function to use np.maximium
+2. Added Auxiliary functions for activation and finding error terms
+3. Moved and decoupled Main Logic of forward and backward propagation to Network class to keep Layer class Small & Modular
 # Update Log 4 - 30 December 2024 (Happy New Year!)
 1. Added Error Term Matrix to Layer class
 2. Added Error.py and functionality to initialize the error term in the output layer
