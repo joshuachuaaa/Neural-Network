@@ -30,7 +30,8 @@ class ReLU:
         return np.maximium(0, neuron_vector)
     
     @staticmethod
-    def findDerivate(neuron_vector):
-
+    def activeNeuronVector(neuron_vector):
+        """Check if Neuron is active, assign 1 or 0"""
+        return np.where(neuron_vector > 0, 1, 0)
 
 

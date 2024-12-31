@@ -54,6 +54,8 @@ class Layer :
             self.activatedNeurons = Softmax.activate(preActivatedNeurons)
 
         return self.neurons
+    
+    def 
 
 
     def updateValues(self, learning_rate:int):
