@@ -8,6 +8,7 @@ My attempt at a neural network implemented in python with no external libraries 
 3. Simplified and Fixed backProp logic
 4. Added Logic in Layer to store booleanActiveNeurons for easier backProp
 5. Updated boolActiveNeuron & activatedNeurons to be np matrices & Added Utils.py
+6. Weight Gradient Matrix Calculated -to do biases
 
 # Update Log 5 - 01 December 2025
 1. removed ReLU.py - Moved class to Activation.py
