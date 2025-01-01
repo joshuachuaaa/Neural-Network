@@ -2,12 +2,15 @@
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
 
+# Update Log 5 - 01 December 2025
+1. removed ReLU.py - Moved class to Activation.py
+2. Moved logic of retrieving active neuron vector to ReLU using np.where()
+
 # Update Log 5 - 31 Decemember 2024
 1. Updated Activation Function to use np.maximium
 2. Added Auxiliary functions for activation and finding error terms
 3. Moved and decoupled Main Logic of forward and backward propagation to Network class to keep Layer class Small & Modular
 4. Added Neuron Vector Calculation in ReLU to determine which neuron was active in the layer (for error term calculation)
-5. Moved logic of retrieving active neuron vector to ReLU using np.where()
 
 # Update Log 4 - 30 December 2024 (Happy New Year!)
 1. Added Error Term Matrix to Layer class
