@@ -55,7 +55,10 @@ class Layer :
 
         return self.neurons
     
-    def 
+    def getActiveNeurons(self):
+        """Return 1 for active neurons and 0 for inactive Neurons"""
+        return ReLU.getActiveNeurons(self.activatedNeurons)
+        
 
 
     def updateValues(self, learning_rate:int):

@@ -73,6 +73,6 @@ class NeuralNetwork:
     
     def calcErrorTerm(self, layer : Layer, nextLayer : Layer):
 
-        return np.dot(np.transpose(nextLayer.weights), layer.weights ) * (how do i multiply it with the dimension of the layer neuron depending if > 0  or not)
+        return np.dot(np.transpose(nextLayer.weights), layer.weights ) * (layer.getActiveNeurons)
 
 
