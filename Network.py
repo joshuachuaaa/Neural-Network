@@ -65,6 +65,7 @@ class NeuralNetwork:
                 return
             elif layer.layerType is LayerType.HIDDEN:
                 error = calcErrorTerm
+                pass
             
     def _calcFinalError(self, rightVals):
         """Find the error term in the output"""
