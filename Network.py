@@ -57,18 +57,23 @@ class NeuralNetwork:
     def backProp(self):
         """Back propagate the error for training and weight/bias adjustment"""
 
-        error : List[Layer] = None
-
         for idx, layer in enumerate(reversed(self.layer_array)):
 
-            if layer.layerType is LayerType.OUTPUT:
-                layer.errorVector = self._calcFinalError
+            # Get reference to previous
+            previousLayer = self.layer_array[idx -1]
 
-            if layer.layerType is LayerType.INPUT:
+            # Stops when reaches input
+            if previousLayer.layerType == LayerType.INPUT:
                 return
             
-            elif layer.layerType is LayerType.HIDDEN:
-                layer.errorVector = self.calcErrorTerm(layer, self.layer_array[idx+1])
+            if layer.layerType is LayerType.OUTPUT:
+                layer.errorVector = self._calcFinalError
+            
+            previousLayer.errorVector = self.calcErrorTerm(previousLayer, layer)
+            layer.gradientVector = self.errorVector @ np.transpose(previousLayer.boolActiveNeurons)
+
+
+            
                 
 
                 
@@ -80,6 +85,6 @@ class NeuralNetwork:
     
     def calcErrorTerm(self, layer : Layer, nextLayer : Layer):
 
-        return ( layer.errorVector @ np.transpose(nextLayer.weights))  * (layer.getActiveNeurons)
+        return ( layer.errorVector @ np.transpose(nextLayer.weights))  * (layer.boolActiveNeurons)
 
 

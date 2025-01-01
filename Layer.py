@@ -1,5 +1,4 @@
 import numpy as np
-import Error
 from __future__ import annotations
 from Activation import ReLU, Softmax
 from enum import Enum
@@ -26,6 +25,7 @@ class Layer :
         # For sake of clarity,
         self.input = None
         self.activatedNeurons = None
+        self.boolActiveNeurons = None
         
 
     def forward(self, X):
@@ -39,7 +39,7 @@ class Layer :
         
         # Calculate Neuron Value if Hidden or Output Layer
         self.input = X
-        preActivatedNeurons = np.dot(X, self.weights) + self.biases
+        preActivatedNeurons = (X @ self.weights) + self.biases
     
         return self._activate(preActivatedNeurons)
 
