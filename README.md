@@ -2,6 +2,9 @@
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
 
+# Update Log 6 - 02 December 2025
+1. Added enumerate in the reversed direction for back propagation, fixed error term calculation
+
 # Update Log 5 - 01 December 2025
 1. removed ReLU.py - Moved class to Activation.py
 2. Moved logic of retrieving active neuron vector to ReLU using np.where()
