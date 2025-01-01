@@ -74,6 +74,9 @@ class NeuralNetwork:
             
             previousLayer.errorVector = self.calcErrorTerm(previousLayer, layer)
             layer.gradientVector = layer.errorVector @ np.transpose(previousLayer.boolActiveNeurons)
+        
+        return 
+
 
 
 
