@@ -24,8 +24,8 @@ class Layer :
 
         # For sake of clarity,
         self.input = None
-        self.activatedNeurons = None
-        self.boolActiveNeurons = None
+        self.activatedNeurons = np.zeros(1,neuronDim)
+        self.boolActiveNeurons = np.zeros(1,neuronDim)
         
 
     def forward(self, X):

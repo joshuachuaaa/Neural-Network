@@ -59,18 +59,23 @@ class NeuralNetwork:
 
         for idx, layer in enumerate(reversed(self.layer_array)):
 
+            # Stops when reaches input
+            if layer.layerType == LayerType.INPUT:
+                return
+            
+            if layer.layerType is LayerType.INPUT or idx == 0:
+                return
+
             # Get reference to previous
             previousLayer = self.layer_array[idx -1]
-
-            # Stops when reaches input
-            if previousLayer.layerType == LayerType.INPUT:
-                return
             
             if layer.layerType is LayerType.OUTPUT:
                 layer.errorVector = self._calcFinalError
             
             previousLayer.errorVector = self.calcErrorTerm(previousLayer, layer)
-            layer.gradientVector = self.errorVector @ np.transpose(previousLayer.boolActiveNeurons)
+            layer.gradientVector = layer.errorVector @ np.transpose(previousLayer.boolActiveNeurons)
+
+
 
 
             
