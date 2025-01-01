@@ -1,6 +1,7 @@
 from Layer import Layer, LayerType
 import Settings
 import numpy as np
+from typing import List
 
 class NeuralNetwork:
     """
@@ -23,7 +24,7 @@ class NeuralNetwork:
         self.hidden_layers_dim = Settings.HIDDEN_LAYER_DIM
 
         # To Store all the layers within a single array
-        self.layer_array = []
+        self.layer_array : List[Layer] = []
 
         # Create input and add input layer to array
         self.input_layer: Layer = Layer(None, self.input_dims, is_input=True, is_output=False)
@@ -54,18 +55,23 @@ class NeuralNetwork:
         pass
 
     def backProp(self):
-
-        error = None
         """Back propagate the error for training and weight/bias adjustment"""
-        for layer in self.layer_array:
+
+        error : List[Layer] = None
+
+        for idx, layer in enumerate(reversed(self.layer_array)):
 
             if layer.layerType is LayerType.OUTPUT:
-                error = self._calcFinalError
+                layer.errorVector = self._calcFinalError
+
             if layer.layerType is LayerType.INPUT:
                 return
+            
             elif layer.layerType is LayerType.HIDDEN:
-                error = calcErrorTerm
-                pass
+                layer.errorVector = self.calcErrorTerm(layer, self.layer_array[idx+1])
+                
+
+                
             
     def _calcFinalError(self, rightVals):
         """Find the error term in the output"""
@@ -74,6 +80,6 @@ class NeuralNetwork:
     
     def calcErrorTerm(self, layer : Layer, nextLayer : Layer):
 
-        return np.dot(np.transpose(nextLayer.weights), layer.weights ) * (layer.getActiveNeurons)
+        return ( layer.errorVector @ np.transpose(nextLayer.weights))  * (layer.getActiveNeurons)
 
 
