@@ -4,6 +4,8 @@ My attempt at a neural network implemented in python with no external libraries 
 
 # Update Log 6 - 02 December 2025
 1. Added enumerate in the reversed direction for back propagation, fixed error term calculation
+2. Removed getActiveNeurons() & Added boolActiveNeurons - Array of 1 and 0s (1 if activated)
+3. Simplified and Fixed backProp logic
 
 # Update Log 5 - 01 December 2025
 1. removed ReLU.py - Moved class to Activation.py
