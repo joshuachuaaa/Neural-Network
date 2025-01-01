@@ -40,8 +40,10 @@ class Layer :
         # Calculate Neuron Value if Hidden or Output Layer
         self.input = X
         preActivatedNeurons = (X @ self.weights) + self.biases
+        activatedNeurons = self._activate(preActivatedNeurons)
+        self.boolActiveNeurons = self.getActiveNeurons()
     
-        return self._activate(preActivatedNeurons)
+        return activatedNeurons
 
 
     def _activate(self, preActivatedNeurons):
