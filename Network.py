@@ -11,23 +11,19 @@ class NeuralNetwork:
 
     def __init__(self):
 
-        # Declare number of neurons in the input layer
+        # Declare number of neurons in the input & output layers
         self.input_dims = Settings.IN_DIMS
-
-        # Declare number of neurons in the output layer
         self.output_dims = Settings.OUT_DIM
 
-        # Declare number of hidden layers
+        # Declare number of hidden layers & neurons
         self.hidden_layers = Settings.HIDDEN_LAYERS
-
-        # Declare number of neurons in hidden layers
         self.hidden_layers_dim = Settings.HIDDEN_LAYER_DIM
 
         # To Store all the layers within a single array
         self.layer_array : List[Layer] = []
 
         # Create input and add input layer to array
-        self.input_layer: Layer = Layer(None, self.input_dims, is_input=True, is_output=False)
+        self.input_layer: Layer = Layer(None, self.input_dims, LayerType.INPUT)
         self.layer_array.append(self.input_layer)
 
         # Create Hidden Layers
@@ -36,24 +32,30 @@ class NeuralNetwork:
             #Create and connect hidden layers
             for idx in range(1,self.hidden_layers):
 
-                # Gain reference to layer in array
-                previous_layer = self.layer_array[idx - 1]
+                # Get previous layer output Dimensions
+                previousLayerDim = self.layer_array[idx - 1].neuronDim
 
                 # Create the new hidden array ( hooking up the previous array )
-                new_hidden_layer = Layer(previous_layer, self.hidden_layers_dim, is_input=False, is_output=False)
+                new_hidden_layer = Layer(previousLayerDim, self.hidden_layers_dim, LayerType.HIDDEN)
 
                 # Add this Layer to the array
                 self.layer_array.append(new_hidden_layer)
             
-        #Create and add output layer
-        self.output_layer : Layer = Layer(self.layer_array[-1], self.output_dims, is_input=False, is_output=True)
+        # Last Hidden Layer Neuron Dimensions
+        previousLayerDim = self.layer_array[idx - 1].neuronDim
+
+        # Creating Output Layer
+        self.output_layer : Layer = Layer(previousLayerDim, self.output_dims, LayerType.OUTPUT)
+
+        # Add it to Array
         self.layer_array.append(self.output_layer)
 
     def forward(self, X):
         """To feed data forward and get the predicted result"""
         out = X
-
-        pass
+        for layer in self.layer_array:
+            out = layer.forward(out)
+        return out
 
     def backProp(self):
         """Back propagate the error for training and weight/bias adjustment"""
@@ -61,8 +63,6 @@ class NeuralNetwork:
         for idx, layer in enumerate(reversed(self.layer_array)):
 
             # Stops when reaches input
-            if layer.layerType == LayerType.INPUT:
-                return
             
             if layer.layerType is LayerType.INPUT or idx == 0:
                 return

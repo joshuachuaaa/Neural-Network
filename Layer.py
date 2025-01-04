@@ -15,12 +15,16 @@ class Layer :
         Initialization of Layer Class
         Type of Layer determined by activation type
         """
-        self.weights = np.random.randn(inputDim, neuronDim) * 0.01
-        self.biases = np.zeros(1, neuronDim)
         self.layerType = layerType
+        self.neuronDim = neuronDim
 
-        self.errorVector = np.zeros(1, neuronDim)
-        self.gradientVector = np.zeros(inputDim, neuronDim)
+        if self.layerType is not LayerType.INPUT:
+
+            self.weights = np.random.randn(inputDim, neuronDim) * 0.01
+            self.biases = np.zeros(1, neuronDim)
+
+            self.errorVector = np.zeros(1, neuronDim)
+            self.gradientVector = np.zeros(inputDim, neuronDim)
 
         # For sake of clarity,
         self.input = None
@@ -41,6 +45,8 @@ class Layer :
         self.input = X
         preActivatedNeurons = (X @ self.weights) + self.biases
         activatedNeurons = self._activate(preActivatedNeurons)
+
+        # ReLU Mask
         self.boolActiveNeurons = self.getActiveNeurons()
     
         return activatedNeurons
