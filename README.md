@@ -5,6 +5,8 @@ My attempt at a neural network implemented in python with no external libraries 
 1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder
 2. Fixed Neural Network instantiation logic error & Added neuronDim to Layer class to connect the layers
 3. Removed Util.py
+4. Changed Forward in Neural Network class to Predict(X)
+5. Changed gradientVector to be gradientMatrix within layer class, also streamlined logic during back and forward propagation
 
 # Update Log 6 - 02 January 2025
 1. Added enumerate in the reversed direction for back propagation, fixed error term calculation

@@ -24,7 +24,7 @@ class Layer :
             self.biases = np.zeros(1, neuronDim)
 
             self.errorVector = np.zeros(1, neuronDim)
-            self.gradientVector = np.zeros(inputDim, neuronDim)
+            self.gradientMatrix = np.zeros(inputDim, neuronDim)
 
         # For sake of clarity,
         self.input = None

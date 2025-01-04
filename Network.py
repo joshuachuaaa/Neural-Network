@@ -50,12 +50,13 @@ class NeuralNetwork:
         # Add it to Array
         self.layer_array.append(self.output_layer)
 
-    def forward(self, X):
+    def predict(self, X):
         """To feed data forward and get the predicted result"""
         out = X
         for layer in self.layer_array:
             out = layer.forward(out)
         return out
+
 
     def backProp(self):
         """Back propagate the error for training and weight/bias adjustment"""
@@ -74,26 +75,22 @@ class NeuralNetwork:
                 layer.errorVector = self._calcFinalError
             
             previousLayer.errorVector = self.calcErrorTerm(previousLayer, layer)
-            layer.gradientVector = layer.errorVector @ np.transpose(previousLayer.boolActiveNeurons)
-        
+
+            # Get the Gradient Vector
+            layer.gradientMatrix = self._calcGradientVector(layer, previousLayer)
+            
         return 
-
-
-
-
-
-            
-                
-
-                
-            
+        
     def _calcFinalError(self, rightVals):
         """Find the error term in the output"""
-
         return rightVals - self.layer_array[-1]
     
+    def _calcGradientMatrix(self, layer , prevLayer):
+        """Returns the gradient matrix"""
+        return layer.errorVector @ np.transpose(prevLayer.boolActiveNeurons)
+    
     def calcErrorTerm(self, layer : Layer, nextLayer : Layer):
-
+        """Find Erro term for layer"""
         return ( layer.errorVector @ np.transpose(nextLayer.weights))  * (layer.boolActiveNeurons)
 
 
