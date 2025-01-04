@@ -1,11 +1,11 @@
 # Neural-Network
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
-# Update Log 7 - 02 December 2025
+# Update Log 7 - 05 January 2025
 1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder
 2. Fixed Neural Network instantiation logic error & Added neuronDim to Layer class to connect the layers
 
-# Update Log 6 - 02 December 2025
+# Update Log 6 - 02 January 2025
 1. Added enumerate in the reversed direction for back propagation, fixed error term calculation
 2. Removed getActiveNeurons() & Added boolActiveNeurons - Array of 1 and 0s (1 if activated)
 3. Simplified and Fixed backProp logic
@@ -13,7 +13,7 @@ My attempt at a neural network implemented in python with no external libraries 
 5. Updated boolActiveNeuron & activatedNeurons to be np matrices & Added Utils.py
 6. Weight Gradient Matrix Calculated -to do biases
 
-# Update Log 5 - 01 December 2025
+# Update Log 5 - 01 January 2025 (Happy New Year!)
 1. removed ReLU.py - Moved class to Activation.py
 2. Moved logic of retrieving active neuron vector to ReLU using np.where()
 
@@ -23,7 +23,7 @@ My attempt at a neural network implemented in python with no external libraries 
 3. Moved and decoupled Main Logic of forward and backward propagation to Network class to keep Layer class Small & Modular
 4. Added Neuron Vector Calculation in ReLU to determine which neuron was active in the layer (for error term calculation)
 
-# Update Log 4 - 30 December 2024 (Happy New Year!)
+# Update Log 4 - 30 December 2024 
 1. Added Error Term Matrix to Layer class
 2. Added Error.py and functionality to initialize the error term in the output layer
 3. Added Pointer for next layer in Layer Class
