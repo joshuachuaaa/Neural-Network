@@ -35,7 +35,7 @@ class Layer :
         """
         # If Input Layer, Do Nothing
         if self.layerType == LayerType.INPUT:
-            return
+            return X
         
         # Calculate Neuron Value if Hidden or Output Layer
         self.input = X

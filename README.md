@@ -1,6 +1,8 @@
 # Neural-Network
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
+# Update Log 7 - 02 December 2025
+1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder
 
 # Update Log 6 - 02 December 2025
 1. Added enumerate in the reversed direction for back propagation, fixed error term calculation

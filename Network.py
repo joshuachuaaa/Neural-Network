@@ -49,8 +49,9 @@ class NeuralNetwork:
         self.output_layer : Layer = Layer(self.layer_array[-1], self.output_dims, is_input=False, is_output=True)
         self.layer_array.append(self.output_layer)
 
-    def forward(self):
+    def forward(self, X):
         """To feed data forward and get the predicted result"""
+        out = X
 
         pass
 
