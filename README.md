@@ -4,6 +4,7 @@ My attempt at a neural network implemented in python with no external libraries 
 # Update Log 7 - 05 January 2025
 1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder
 2. Fixed Neural Network instantiation logic error & Added neuronDim to Layer class to connect the layers
+3. Removed Util.py
 
 # Update Log 6 - 02 January 2025
 1. Added enumerate in the reversed direction for back propagation, fixed error term calculation
