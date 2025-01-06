@@ -1,11 +1,12 @@
-
 # Number of Neurons in the input layer
-IN_DIMS = 100
+IN_DIMS = 784
 
 # Number of Neurons in the output layer
-OUT_DIM = 1
+OUT_DIM = 10
 
 # Number of Hidden Layers
-LAYERS_DIMS = 5
+HIDDEN_LAYERS = 1
 
+# Number of Neurons in each Hidden Layer
+HIDDEN_LAYER_DIM = 128
 

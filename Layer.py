@@ -61,7 +61,7 @@ class Layer :
         elif self.layerType is LayerType.OUTPUT:
             self.activatedNeurons = Softmax.activate(preActivatedNeurons)
 
-        return self.neurons
+        return self.activatedNeurons
     
     def getActiveNeurons(self):
         """Return 1 for active neurons and 0 for inactive Neurons"""

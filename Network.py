@@ -64,7 +64,6 @@ class NeuralNetwork:
         for idx, layer in enumerate(reversed(self.layer_array)):
 
             # Stops when reaches input
-            
             if layer.layerType is LayerType.INPUT or idx == 0:
                 return
 

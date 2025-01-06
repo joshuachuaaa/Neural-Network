@@ -27,7 +27,7 @@ class ReLU:
     @staticmethod
     def activate(neuron_vector):
         """Applies ReLU activation using np.maximium"""
-        return np.maximium(0, neuron_vector)
+        return np.maximum(0, neuron_vector)
     
     @staticmethod
     def getActiveNeurons(neuron_vector):
