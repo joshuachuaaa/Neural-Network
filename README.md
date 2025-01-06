@@ -10,6 +10,8 @@ My attempt at a neural network implemented in python with no external libraries 
 5. Added Epochs and Batch Size to Settings.py and epoch and batch loss to main.py
 6. Fixing bugs regarding matrix manipulation of finding the error terms
 7. Fixing Logic from Converting Schoastic Gradient Descent to Mini-Batch Gradient Descent
+8. Identified Bug - Final Error Term represents all the error terms of each training 
+9. Need to change from 1 to 64 (batch size) Row Dimension
 
 # Update Log 7 - 05 January 2025
 1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder
