@@ -50,6 +50,8 @@ class NeuralNetwork:
         # Add it to Array
         self.layer_array.append(self.output_layer)
 
+        print(self.layer_array)
+
     def predict(self, X):
         """To feed data forward and get the predicted result"""
         out = X
@@ -58,38 +60,44 @@ class NeuralNetwork:
         return out
 
 
-    def backProp(self):
+    def backProp(self, y_batch):
         """Back propagate the error for training and weight/bias adjustment"""
 
         for idx, layer in enumerate(reversed(self.layer_array)):
 
             # Stops when reaches input
-            if layer.layerType is LayerType.INPUT or idx == 0:
+            if layer.layerType is LayerType.INPUT:
                 return
 
+
             # Get reference to previous
-            previousLayer = self.layer_array[idx -1]
+            previousLayer = self.layer_array[idx - 1]
             
             if layer.layerType is LayerType.OUTPUT:
-                layer.errorVector = self._calcFinalError
+                layer.errorVector = self._calcFinalError(y_batch)
             
             previousLayer.errorVector = self.calcErrorTerm(previousLayer, layer)
 
             # Get the Gradient Vector
-            layer.gradientMatrix = self._calcGradientVector(layer, previousLayer)
-            
+            layer.gradientMatrix = self._calcGradientMatrix(layer, previousLayer)
+
+            # Debugging: Print summary statistics of gradients
+            print(f"Layer {idx} - Gradient Matrix Mean: {np.mean(layer.gradientMatrix):.4f}, Std: {np.std(layer.gradientMatrix):.4f}")
+
         return 
         
     def _calcFinalError(self, rightVals):
         """Find the error term in the output"""
-        return rightVals - self.layer_array[-1]
+        print(rightVals.shape)
+        return rightVals - self.layer_array[-1].activatedNeurons
     
     def _calcGradientMatrix(self, layer , prevLayer):
         """Returns the gradient matrix"""
         return layer.errorVector @ np.transpose(prevLayer.boolActiveNeurons)
     
     def calcErrorTerm(self, layer : Layer, nextLayer : Layer):
-        """Find Erro term for layer"""
-        return ( layer.errorVector @ np.transpose(nextLayer.weights))  * (layer.boolActiveNeurons)
+        """Find Error term for layer"""
+        print(layer.errorVector.shape)
+        return ( np.transpose(nextLayer.weights) @ layer.errorVector)  * (layer.boolActiveNeurons)
 
 

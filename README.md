@@ -5,6 +5,9 @@ My attempt at a neural network implemented in python with no external libraries 
 # Update Log 8 - 07 January 2025
 1. Removed Softmax.py
 2. Fixed some bugs with naming conventions
+3. Added Main.py
+4. Added Datasets and fixed some bugs with naming conventions and parameters
+5. Added Epochs and Batch Size to Settings.py and epoch and batch loss to main.py
 
 # Update Log 7 - 05 January 2025
 1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder

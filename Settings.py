@@ -5,8 +5,23 @@ IN_DIMS = 784
 OUT_DIM = 10
 
 # Number of Hidden Layers
-HIDDEN_LAYERS = 1
+HIDDEN_LAYERS = 4
 
 # Number of Neurons in each Hidden Layer
 HIDDEN_LAYER_DIM = 128
+
+# Learning Rate
+LEARNING_RATE = 0.001
+
+# Batch Size
+BATCH_SIZE = 64 
+
+# Number of Epochs
+EPOCHS = 10 
+
+
+
+
+
+
 
