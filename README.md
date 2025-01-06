@@ -1,6 +1,10 @@
 # Neural-Network
 My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
 
+
+# Update Log 8 - 07 January 2025
+1. Removed Softmax.py
+
 # Update Log 7 - 05 January 2025
 1. Removed repeat code in back prop, added forward propagation logic in neuralnetwork class, added test folder
 2. Fixed Neural Network instantiation logic error & Added neuronDim to Layer class to connect the layers
