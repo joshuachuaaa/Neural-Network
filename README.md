@@ -1,5 +1,170 @@
-# Neural-Network
-My attempt at a neural network implemented in python with no external libraries and built from scratch (with the exception of numpy)
+# Neural Network from Scratch!
+
+This project implements a fully connected neural network in Python, trained on the MNIST digit classification task.  
+It includes custom **ReLU** and **Softmax** activations, a **Layer** abstraction, and a **NeuralNetwork** class.  
+The code illustrates every essential step: **forward pass**, **backpropagation**, and **gradient update**—all from scratch without high-level deep learning libraries.
+
+---
+
+## Table of Contents
+1. [Project Overview](#project-overview)  
+2. [Key Components](#key-components)  
+   - [Activation Functions](#activation-functions)  
+   - [Layer Class](#layer-class)  
+   - [NeuralNetwork Class](#neuralnetwork-class)  
+3. [Mathematical Underpinnings](#mathematical-underpinnings)  
+   - [Forward Pass](#1-forward-pass)  
+   - [Loss Function](#2-loss-function)  
+   - [Backpropagation](#3-backpropagation)  
+   - [Gradient Update](#4-gradient-update)  
+4. [Code Structure](#code-structure)  
+5. [How to Run](#how-to-run)  
+6. [Future Improvements](#future-improvements)
+
+---
+
+## Project Overview
+
+**Goal**: Classify handwritten digits (0–9) from the MNIST dataset.
+
+- **Input dimension**: 784 (each \(28 \times 28\) image flattened).  
+- **Hidden layers**: ReLU activation.  
+- **Output layer**: Softmax for 10-digit classification.  
+- **Training**: Mini-batch gradient descent, cross-entropy loss, multiple epochs.
+
+The code is structured to be understandable and extensible—no PyTorch/TensorFlow dependencies, just raw NumPy.
+
+---
+
+## Key Components
+
+### Activation Functions
+
+1. **ReLU**  
+   \[
+   \mathrm{ReLU}(z) = \max(0, z)
+   \]  
+   - Returns 0 for negative inputs, identity for positive inputs.  
+   - Derivative is 1 for \(z > 0\), 0 otherwise.
+
+2. **Softmax**  
+   \[
+   \mathrm{Softmax}(\mathbf{z})_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}
+   \]  
+   - Used in the final (output) layer to convert raw scores to probabilities.
+
+### Layer Class
+
+Each layer (`Layer.py`):
+- Holds **weights** (W) and **biases** (b) (except for the **input** layer).
+- On `forward(...)`, computes:
+
+Z = X @ W + b A = activation(Z)
+
+- Stores an **error vector** (delta) and **gradient matrix** for backprop.
+
+Three types:
+1. **INPUT** – Passes data along, no weights/biases.  
+2. **HIDDEN** – Uses ReLU activation.  
+3. **OUTPUT** – Uses Softmax activation.
+
+### NeuralNetwork Class
+
+- Builds a stack of `Layer` objects: **Input → Hidden(s) → Output**.
+- `predict(X)`: Forward pass through all layers.  
+- `backProp(y_batch)`: 
+1. Compute final error at output layer.  
+2. Propagate errors backward to hidden layers.  
+3. Compute weight/bias gradients.  
+
+---
+
+## Mathematical Underpinnings
+
+### 1. Forward Pass
+
+For layer \(l\) (not the input):
+Z^(l) = A^(l-1) * W^(l) + b^(l) A^(l) = activation( Z^(l) )
+
+- \(A^(l-1)\): activation from previous layer  
+- \(W^(l)\), \(b^(l)\): current layer's weights/biases  
+- `activation(...)` could be ReLU or Softmax (for output).
+
+### 2. Loss Function
+
+We use **cross-entropy** for classification:
+C = - (1/m) * sum_{k=1..m} [ sum_{i=1..num_classes} ( Y_{k,i} * log(Y_hat_{k,i}) ) ]
+
+- \(m\): batch size  
+- \(Y_{k}\): one-hot true label for sample k  
+- \(Y_hat_{k}\): predicted probability (from Softmax).
+
+### 3. Backpropagation
+
+1. **Output layer error** (\(\delta^{(output)}\)):  
+delta_output = A_output - Y
+
+when using softmax + cross-entropy.
+
+2. **Hidden layer error**:  
+- `∘` is the elementwise (Hadamard) product.  
+- `d(ReLU(Z))` is 1 if Z>0, else 0.
+
+### 4. Gradient Update
+
+The gradient w.r.t. layer \(l\)'s weights:
+grad(W^(l)) = (A^(l-1))^T * delta^(l)
+
+
+To update:
+W^(l) <- W^(l) - η * grad(W^(l)) b^(l) <- b^(l) - η * sum_of(delta^(l))
+
+for all samples in the batch (either sum or average the gradients).
+
+---
+
+## Code Structure
+
+- **`Activation.py`**  
+  - `Softmax.activate(...)` — stable softmax  
+  - `ReLU.activate(...)` — ReLU  
+  - `ReLU.getActiveNeurons(...)` — returns a mask (1 or 0)
+
+- **`Layer.py`**  
+  - `Layer.__init__`  
+  - `Layer.forward(X)` — forward pass  
+  - `Layer.updateValues(learning_rate)` — weight/bias updates
+
+- **`Network.py`**  
+  - `NeuralNetwork.__init__` — creates input, hidden, and output layers  
+  - `NeuralNetwork.predict(X)` — forward pass through all layers  
+  - `NeuralNetwork.backProp(y_batch)` — calculates deltas and gradients
+
+- **`main.py`**  
+  - Loads MNIST data  
+  - Performs training loop: forward, backprop, update  
+  - Reports loss and accuracy
+
+- **`Settings.py`**  
+  - Hyperparameters (e.g., `LEARNING_RATE`, `BATCH_SIZE`, `EPOCHS`)
+
+---
+
+## How to Run
+
+1. **Ensure MNIST data** files (`train-images-idx3-ubyte.gz`, etc.) are in `datasets/`.  
+2. Install dependencies (if needed):
+   ```bash
+   pip install numpy
+
+
+
+
+
+
+
+
+
 
 
 # Update Log 8 - 07 January 2025
