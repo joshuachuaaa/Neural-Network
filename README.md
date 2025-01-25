@@ -27,7 +27,7 @@ The code illustrates every essential step: **forward pass**, **backpropagation**
 
 **Goal**: Classify handwritten digits (0–9) from the MNIST dataset.
 
-- **Input dimension**: 784 (each \(28 \times 28\) image flattened).  
+- **Input dimension**: 784 (each $'\(28 \times 28\)'$ image flattened). 
 - **Hidden layers**: ReLU activation.  
 - **Output layer**: Softmax for 10-digit classification.  
 - **Training**: Mini-batch gradient descent, cross-entropy loss, multiple epochs.
@@ -153,9 +153,12 @@ for all samples in the batch (either sum or average the gradients).
 ## How to Run
 
 1. **Ensure MNIST data** files (`train-images-idx3-ubyte.gz`, etc.) are in `datasets/`.  
+
 2. Install dependencies (if needed):
    ```bash
    pip install numpy
+
+3. 
 
 
 # Update Log 8 - 07 January 2025
