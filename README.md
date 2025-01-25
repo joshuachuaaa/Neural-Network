@@ -158,7 +158,7 @@ for all samples in the batch (either sum or average the gradients).
    ```bash
    pip install numpy
 
-3. 
+3. python main.py
 
 
 # Update Log 8 - 07 January 2025
