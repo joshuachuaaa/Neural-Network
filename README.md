@@ -41,16 +41,16 @@ The code is structured to be understandable and extensible—no PyTorch/TensorFl
 ### Activation Functions
 
 1. **ReLU**  
-   \[
+   $\[
    \mathrm{ReLU}(z) = \max(0, z)
-   \]  
+   \]$
    - Returns 0 for negative inputs, identity for positive inputs.  
    - Derivative is 1 for \(z > 0\), 0 otherwise.
 
 2. **Softmax**  
-   \[
+   $\[
    \mathrm{Softmax}(\mathbf{z})_i = \frac{\exp(z_i)}{\sum_j \exp(z_j)}
-   \]  
+   \] $ 
    - Used in the final (output) layer to convert raw scores to probabilities.
 
 ### Layer Class
@@ -59,7 +59,7 @@ Each layer (`Layer.py`):
 - Holds **weights** (W) and **biases** (b) (except for the **input** layer).
 - On `forward(...)`, computes:
 
-Z = X @ W + b A = activation(Z)
+$Z = X @ W + b A = activation(Z)$
 
 - Stores an **error vector** (delta) and **gradient matrix** for backprop.
 
@@ -84,24 +84,24 @@ Three types:
 ### 1. Forward Pass
 
 For layer \(l\) (not the input):
-Z^(l) = A^(l-1) * W^(l) + b^(l) A^(l) = activation( Z^(l) )
+$Z^(l) = A^(l-1) * W^(l) + b^(l) A^(l) = activation( Z^(l) )$
 
-- \(A^(l-1)\): activation from previous layer  
-- \(W^(l)\), \(b^(l)\): current layer's weights/biases  
+- $\(A^(l-1)\)$: activation from previous layer  
+- $\(W^(l)\), \(b^(l)\)$: current layer's weights/biases  
 - `activation(...)` could be ReLU or Softmax (for output).
 
 ### 2. Loss Function
 
 We use **cross-entropy** for classification:
-C = - (1/m) * sum_{k=1..m} [ sum_{i=1..num_classes} ( Y_{k,i} * log(Y_hat_{k,i}) ) ]
+$C = - (1/m) * sum_{k=1..m} [ sum_{i=1..num_classes} ( Y_{k,i} * log(Y_hat_{k,i}) ) ]$
 
-- \(m\): batch size  
-- \(Y_{k}\): one-hot true label for sample k  
-- \(Y_hat_{k}\): predicted probability (from Softmax).
+- $\(m\)$: batch size  
+- $\(Y_{k}\)$: one-hot true label for sample k  
+- $\(Y_hat_{k}\)$: predicted probability (from Softmax).
 
 ### 3. Backpropagation
 
-1. **Output layer error** (\(\delta^{(output)}\)):  
+1. **Output layer error** ($\(\delta^{(output)}\)$):  
 delta_output = A_output - Y
 
 when using softmax + cross-entropy.
@@ -113,11 +113,11 @@ when using softmax + cross-entropy.
 ### 4. Gradient Update
 
 The gradient w.r.t. layer \(l\)'s weights:
-grad(W^(l)) = (A^(l-1))^T * delta^(l)
+$grad(W^(l)) = (A^(l-1))^T * delta^(l)$
 
 
 To update:
-W^(l) <- W^(l) - η * grad(W^(l)) b^(l) <- b^(l) - η * sum_of(delta^(l))
+$W^(l) <- W^(l) - η * grad(W^(l)) b^(l) <- b^(l) - η * sum_of(delta^(l))$
 
 for all samples in the batch (either sum or average the gradients).
 
