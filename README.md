@@ -158,15 +158,6 @@ for all samples in the batch (either sum or average the gradients).
    pip install numpy
 
 
-
-
-
-
-
-
-
-
-
 # Update Log 8 - 07 January 2025
 1. Removed Softmax.py
 2. Fixed some bugs with naming conventions
