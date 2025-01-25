@@ -27,7 +27,7 @@ The code illustrates every essential step: **forward pass**, **backpropagation**
 
 **Goal**: Classify handwritten digits (0–9) from the MNIST dataset.
 
-- **Input dimension**: 784 (each $'\(28 \times 28\)'$ image flattened). 
+- **Input dimension**: 784 (each $\(28 \times 28\)$ image flattened). 
 - **Hidden layers**: ReLU activation.  
 - **Output layer**: Softmax for 10-digit classification.  
 - **Training**: Mini-batch gradient descent, cross-entropy loss, multiple epochs.
